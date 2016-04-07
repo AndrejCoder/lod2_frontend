@@ -23,6 +23,24 @@ scratch. This page gets rid of all links and provides the needed markup only.
         apply the skin class to the body tag so the changes take effect.
   -->
   <link rel="stylesheet" href="dist/css/skins/skin-blue.min.css">
+    <!-- This is the localization file of the grid controlling messages, labels, etc.
+    <!-- A link to a jQuery UI ThemeRoller theme, more than 22 built-in and many more custom -->
+    <link rel="stylesheet" type="text/css" media="screen" href="http://www.guriddo.net/demo/css/jquery-ui.css" />
+    <!-- The link to the CSS that the grid needs -->
+    <link rel="stylesheet" type="text/css" media="screen" href="http://www.guriddo.net/demo/css/trirand/ui.jqgrid.css" />
+    <!-- A link to a jQuery multiselect css -->
+    <link rel="stylesheet" type="text/css" media="screen" href="http://www.guriddo.net/demo/css/ui.multiselect.css" />
+  <!-- jQuery 2.2.0 -->
+  <script src="plugins/jQuery/jQuery-2.2.0.min.js"></script>
+
+    <!-- This is the Javascript file of jQuery UI -->
+    <script type="text/ecmascript" src="http://www.guriddo.net/demo/js/jquery-ui.min.js"></script>
+    <!-- We support more than 40 localizations -->
+    <script type="text/ecmascript" src="http://www.guriddo.net/demo/js/trirand/i18n/grid.locale-ru.js"></script>
+    <!-- This is the Javascript file of jqGrid -->
+    <script type="text/ecmascript" src="http://www.guriddo.net/demo/js/trirand/jquery.jqGrid.min.js"></script>
+    <!-- This is the multiselect file. It should be loaded after jqueryui and befor the grid  -->
+    <script type="text/ecmascript" src="http://www.guriddo.net/demo/js/ui.multiselect.js"></script>
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -333,11 +351,11 @@ desired effect
                     { label: 'Возраст', name: 'age', width: 150, editable: true, edittype: "text", formatter: "integer", sorttype: 'integer' }
                 ],
 		        viewrecords: true,
-            width: 780,
-            height: 250,
-            rowNum: 2,
-            rowList: [2, 4, 5, 10, 15],
-            pager: "#jqGridPager",
+                width: 780,
+                height: 250,
+                rowNum: 2,
+                rowList: [2, 4, 5, 10, 15],
+                pager: "#jqGridPager",
 		        caption: 'Очень полезный реестр!',
                 loadComplete: function(data){
                     jqGrid.jqGrid('setGridParam', {postData: {'colModel': getColModel()}})
@@ -430,7 +448,7 @@ desired effect
         <h3 class="control-sidebar-heading">Recent Activity</h3>
         <ul class="control-sidebar-menu">
           <li>
-            <a href="javascript::;">
+            <a href="javascript:void(0);">
               <i class="menu-icon fa fa-birthday-cake bg-red"></i>
 
               <div class="menu-info">
@@ -446,7 +464,7 @@ desired effect
         <h3 class="control-sidebar-heading">Tasks Progress</h3>
         <ul class="control-sidebar-menu">
           <li>
-            <a href="javascript::;">
+            <a href="javascript:void(0);">
               <h4 class="control-sidebar-subheading">
                 Custom Template Design
                 <span class="label label-danger pull-right">70%</span>
@@ -495,24 +513,6 @@ desired effect
 
 <!-- REQUIRED JS SCRIPTS -->
 
-<!-- jQuery 2.2.0 -->
-<script src="plugins/jQuery/jQuery-2.2.0.min.js"></script>
-
-    <!-- This is the Javascript file of jQuery UI -->   
-    <script type="text/ecmascript" src="http://www.guriddo.net/demo/js/jquery-ui.min.js"></script>	
-    <!-- We support more than 40 localizations -->
-    <script type="text/ecmascript" src="http://www.guriddo.net/demo/js/trirand/i18n/grid.locale-ru.js"></script>
-    <!-- This is the Javascript file of jqGrid -->   
-    <script type="text/ecmascript" src="http://www.guriddo.net/demo/js/trirand/jquery.jqGrid.min.js"></script>
-    <!-- This is the multiselect file. It should be loaded after jqueryui and befor the grid  -->   
-    <script type="text/ecmascript" src="http://www.guriddo.net/demo/js/ui.multiselect.js"></script>
-    <!-- This is the localization file of the grid controlling messages, labels, etc.
-    <!-- A link to a jQuery UI ThemeRoller theme, more than 22 built-in and many more custom -->
-    <link rel="stylesheet" type="text/css" media="screen" href="http://www.guriddo.net/demo/css/jquery-ui.css" />
-    <!-- The link to the CSS that the grid needs -->
-    <link rel="stylesheet" type="text/css" media="screen" href="http://www.guriddo.net/demo/css/trirand/ui.jqgrid.css" />
-    <!-- A link to a jQuery multiselect css -->
-    <link rel="stylesheet" type="text/css" media="screen" href="http://www.guriddo.net/demo/css/ui.multiselect.css" />
 <!-- Bootstrap 3.3.6 -->
 <script src="bootstrap/js/bootstrap.min.js"></script>
 <!-- AdminLTE App -->
