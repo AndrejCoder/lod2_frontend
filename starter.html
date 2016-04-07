@@ -60,9 +60,9 @@ desired effect
     <!-- Logo -->
     <a href="index2.html" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>A</b>LT</span>
+      <span class="logo-mini"><b>Л</b>ОД</span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>Admin</b>LTE</span>
+      <span class="logo-lg"><b>Ваш </b>ЛОД</span>
     </a>
 
     <!-- Header Navbar -->
@@ -176,7 +176,7 @@ desired effect
               <!-- The user image in the navbar-->
               <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
-              <span class="hidden-xs">Alexander Pierce</span>
+              <span class="hidden-xs">Мисропьян Кирилл Александрович</span>
             </a>
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->
@@ -184,8 +184,8 @@ desired effect
                 <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
 
                 <p>
-                  Alexander Pierce - Web Developer
-                  <small>Member since Nov. 2012</small>
+                  Мисропьян Кирилл
+                  <small>Главный специалист</small>
                 </p>
               </li>
               <!-- Menu Body -->
@@ -234,16 +234,16 @@ desired effect
           <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>Alexander Pierce</p>
+          <p>Мисропьян Кирилл</p>
           <!-- Status -->
-          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+          <a href="#"><i class="fa fa-circle text-success"></i>В сети</a>
         </div>
       </div>
 
       <!-- search form (Optional) -->
       <form action="#" method="get" class="sidebar-form">
         <div class="input-group">
-          <input type="text" name="q" class="form-control" placeholder="Search...">
+          <input type="text" name="q" class="form-control" placeholder="Поиск...">
               <span class="input-group-btn">
                 <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
                 </button>
@@ -254,15 +254,15 @@ desired effect
 
       <!-- Sidebar Menu -->
       <ul class="sidebar-menu">
-        <li class="header">HEADER</li>
+        <li class="header">МЕНЮ</li>
         <!-- Optionally, you can add icons to the links -->
-        <li class="active"><a href="#"><i class="fa fa-link"></i> <span>Link</span></a></li>
-        <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li>
+        <li class="active"><a href="starter.html"><i class="fa fa-link"></i> <span>Заявки</span></a></li>
+        <li><a href="tab_form1.html"><i class="fa fa-th-list"></i> <span>Карточки</span></a></li>
         <li class="treeview">
-          <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span> <i class="fa fa-angle-left pull-right"></i></a>
+          <a href="#"><i class="fa fa-file-text-o"></i> <span>Приказы</span> <i class="fa fa-angle-left pull-right"></i></a>
           <ul class="treeview-menu">
-            <li><a href="#">Link in level 2</a></li>
-            <li><a href="#">Link in level 2</a></li>
+            <li><a href="#">На получение</a></li>
+            <li><a href="#">На переоформление</a></li>
           </ul>
         </li>
       </ul>
@@ -276,8 +276,8 @@ desired effect
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Page Header
-        <small>Optional description</small>
+        Список заявок
+        <small>Ваши и не ваши заявки</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
@@ -285,13 +285,124 @@ desired effect
       </ol>
     </section>
 
-    <!-- Main content -->
+    <!-- Main content +++++++++= -->
     <section class="content">
 
-      <!-- Your Page Content Here -->
+    <table id="jqGrid"></table>
+    <div id="jqGridPager"></div>
+
+    <script type="text/javascript"> 
+        $(document).ready(function () {
+            var jqGrid = $("#jqGrid");
+            jqGrid.jqGrid({
+                url: 'http://127.0.0.1:8000/registries/registry/',
+                mtype: "GET",
+                datatype: "json",
+                colModel: [
+		                { label: '№', name: 'id', key: true, width: 75, formatter: "integer" },
+                    { label: 'Фамилия', name: 'last_name', width: 75, editable: true, formatter: "string" },
+                    { label: 'Имя', name: 'first_name', width: 150, editable: true, formatter: "string" },
+                    { label: 'Отчество', name: 'second_name', width: 150, editable: true, formatter: "string" },
+                    { label: 'Дата рождения', name: 'birthday', width: 150, editable: true, edittype:"text", formatter: "date", formatoptions: {srcformat: 'd.m.Y', newformat: 'd.m.Y', defaultValue:null},
+                        editoptions: {
+                            // dataInit is the client-side event that fires upon initializing the toolbar search field for a column
+                            // use it to place a third party control to customize the toolbar
+                            dataInit: function (element) {
+                                $(element).datepicker({
+                                    id: 'birthday_datePicker',
+                                    dateFormat: 'dd.mm.yy',
+                                    //minDate: new Date(2010, 0, 1),
+                                    maxDate: new Date(2020, 0, 1)
+                                });
+                            }
+                        }, sorttype:'date', searchoptions: {
+                            // dataInit is the client-side event that fires upon initializing the toolbar search field for a column
+                            // use it to place a third party control to customize the toolbar
+                            dataInit: function (element) {
+                                $(element).datepicker({
+                                    id: 'orderDate_datePicker',
+                                    dateFormat: 'dd.mm.yy',
+                                    //minDate: new Date(2010, 0, 1),
+                                    maxDate: new Date(2020, 0, 1),
+                                    showOn: 'focus'
+                                });
+                            }
+                        }
+		                },
+                    { label: 'Место рождения', name: 'place', width: 150, editable: true, edittype: "textarea", formatter: "string" },
+                    { label: 'Возраст', name: 'age', width: 150, editable: true, edittype: "text", formatter: "integer", sorttype: 'integer' }
+                ],
+		        viewrecords: true,
+            width: 780,
+            height: 250,
+            rowNum: 2,
+            rowList: [2, 4, 5, 10, 15],
+            pager: "#jqGridPager",
+		        caption: 'Очень полезный реестр!',
+                loadComplete: function(data){
+                    jqGrid.jqGrid('setGridParam', {postData: {'colModel': getColModel()}})
+                }
+            });
+
+            jqGrid.jqGrid('bindKeys');
+
+
+            jqGrid.navGrid('#jqGridPager',
+                // the buttons to appear on the toolbar of the grid
+                { edit: true, add: true, del: true, search: true, refresh: false, view: false},
+                {
+                    mtype: 'PATCH',
+                    onclickSubmit: function (params, posdata) {
+                        // first test something and then change the URL with
+                        params.url = 'http://127.0.0.1:8000/registries/registry/' + jqGrid.jqGrid('getGridParam',"selrow") + '/';
+                    },
+                    closeAfterEdit: true
+                },
+                {
+                    mtype: 'POST',
+                    url: 'http://127.0.0.1:8000/registries/registry/',
+                    closeAfterAdd: true
+                },
+                {
+                    mtype: 'DELETE',
+                    onclickSubmit: function (params, posdata) {
+                        // first test something and then change the URL with
+                        params.url = 'http://127.0.0.1:8000/registries/registry/' + jqGrid.jqGrid('getGridParam',"selrow") + '/';
+                    }
+                },
+                {
+                    closeAfterSearch: true,
+                    multipleSearch: true
+                }
+            );
+
+            jqGrid.navButtonAdd('#jqGridPager', {
+                buttonicon: "ui-icon-calculator",
+                title: "Column chooser",
+                caption: "",
+                position: "last",
+                onClickButton: function() {
+                    // call the column chooser method
+                    $("#jqGrid").jqGrid('columnChooser');
+                }
+            });
+        });
+
+        function getColModel() {
+            var cols = $("#jqGrid").jqGrid('getGridParam',"colModel");
+            var typeDict = {};
+            for (var i = 0; i < cols.length; i++) {
+                typeDict[cols[i].name] = cols[i].formatter;
+            }
+            /*console.log(JSON.stringify(typeDict));
+            console.log(JSON.stringify($("#jqGrid").jqGrid('getGridParam',"colModel")));*/
+            return JSON.stringify(typeDict);
+        }
+   </script>
+    <!-- End of code related to code tabs -->
 
     </section>
-    <!-- /.content -->
+    <!-- /.content +++++++++++ -->
   </div>
   <!-- /.content-wrapper -->
 
@@ -299,10 +410,10 @@ desired effect
   <footer class="main-footer">
     <!-- To the right -->
     <div class="pull-right hidden-xs">
-      Anything you want
+      АИС ЛОД. Версия 2.0
     </div>
     <!-- Default to the left -->
-    <strong>Copyright &copy; 2015 <a href="#">Company</a>.</strong> All rights reserved.
+    <strong>Copyright &copy; 2016 <a href="http://www.lanit.ru/structure/region/">ЛАНИТ-Волга</a>.</strong> Все права защищены.
   </footer>
 
   <!-- Control Sidebar -->
@@ -386,6 +497,22 @@ desired effect
 
 <!-- jQuery 2.2.0 -->
 <script src="plugins/jQuery/jQuery-2.2.0.min.js"></script>
+
+    <!-- This is the Javascript file of jQuery UI -->   
+    <script type="text/ecmascript" src="http://www.guriddo.net/demo/js/jquery-ui.min.js"></script>	
+    <!-- We support more than 40 localizations -->
+    <script type="text/ecmascript" src="http://www.guriddo.net/demo/js/trirand/i18n/grid.locale-ru.js"></script>
+    <!-- This is the Javascript file of jqGrid -->   
+    <script type="text/ecmascript" src="http://www.guriddo.net/demo/js/trirand/jquery.jqGrid.min.js"></script>
+    <!-- This is the multiselect file. It should be loaded after jqueryui and befor the grid  -->   
+    <script type="text/ecmascript" src="http://www.guriddo.net/demo/js/ui.multiselect.js"></script>
+    <!-- This is the localization file of the grid controlling messages, labels, etc.
+    <!-- A link to a jQuery UI ThemeRoller theme, more than 22 built-in and many more custom -->
+    <link rel="stylesheet" type="text/css" media="screen" href="http://www.guriddo.net/demo/css/jquery-ui.css" />
+    <!-- The link to the CSS that the grid needs -->
+    <link rel="stylesheet" type="text/css" media="screen" href="http://www.guriddo.net/demo/css/trirand/ui.jqgrid.css" />
+    <!-- A link to a jQuery multiselect css -->
+    <link rel="stylesheet" type="text/css" media="screen" href="http://www.guriddo.net/demo/css/ui.multiselect.css" />
 <!-- Bootstrap 3.3.6 -->
 <script src="bootstrap/js/bootstrap.min.js"></script>
 <!-- AdminLTE App -->
